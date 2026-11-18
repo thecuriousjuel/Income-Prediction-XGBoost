@@ -1,9 +1,13 @@
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, url_for
+from werkzeug.middleware.proxy_fix import ProxyFix
 import pandas as pd
 import joblib
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1000 * 1000
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
 @app.route('/', methods=['GET'])
 def homepage():
@@ -71,6 +75,9 @@ def preprocess_and_model(df):
     return target_value
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    port = int(os.environ.get("INCOME_PORT", 5102))
+    host = os.environ.get("HOST", "127.0.0.1")
+    print(f"🚀 Income Prediction App running on http://{host}:{port}")
+    app.run(host=host, port=port, debug=False)
 
     
