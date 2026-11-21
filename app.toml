@@ -1,0 +1,35 @@
+# ==============================================================================
+# Income Prediction - Unified Application Manifest
+# ==============================================================================
+
+[app]
+id = "income-prediction"
+name = "Income Prediction"
+category = "public_projects"
+slug = "income-prediction"
+url_path = "/income-prediction/"
+type = "python"
+
+# ------------------------------------------------------------------------------
+# Development Environment
+# ------------------------------------------------------------------------------
+[environments.development]
+port = 5202
+host = "127.0.0.1"
+command = ["uv", "run", "main.py"]
+
+[environments.development.env]
+PORT = 5202
+APP_ENV = "development"
+
+# ------------------------------------------------------------------------------
+# Production Environment
+# ------------------------------------------------------------------------------
+[environments.production]
+port = 7202
+host = "127.0.0.1"
+command = ["uv", "run", "main.py"]
+
+[environments.production.env]
+PORT = 7202
+APP_ENV = "production"

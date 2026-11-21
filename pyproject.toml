@@ -12,5 +12,6 @@ dependencies = [
     "numpy>=1.21.2,<1.23.0",
     "scipy>=1.7.1,<1.8.0",
     "xgboost>=1.4.2,<1.6.0",
+    "setuptools>=65.0.0,<70.0.0",
     "gunicorn>=20.1.0",
 ]
