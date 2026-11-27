@@ -78,6 +78,7 @@ if __name__ == '__main__':
     port = int(os.environ.get("PORT", os.environ.get("INCOME_PORT", 5202)))
     host = os.environ.get("HOST", "127.0.0.1")
     print(f"🚀 Income Prediction App running on http://{host}:{port}")
-    app.run(host=host, port=port, debug=False)
+    from waitress import serve
+    serve(app, host=host, port=port, threads=4)
 
     
